@@ -69,7 +69,15 @@ To replicate this analysis, follow these steps:
 
 ---
 
+| File Name | Description |
+| :--- | :--- |
+| `project_queries.sql` | Contains all 10 optimized SQL queries used for the analysis. |
+| `README.md` | This overview document, providing context, insights, and instructions. |
+
+
+---
+
 ## 🙋 Contact
-* **Your Name:** [Ramona Duica]
-* **GitHub:** [https://github.com/ramonaduica]
-* **LinkedIn:** [https://www.linkedin.com/in/ramonaduica]
+* **Your Name:** Ramona Duica
+* **GitHub:** https://github.com/ramonaduica
+* **LinkedIn:** https://www.linkedin.com/in/ramonaduica
