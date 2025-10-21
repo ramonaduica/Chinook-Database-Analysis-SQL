@@ -69,7 +69,7 @@ To replicate this analysis, follow these steps:
 
 ---
 
-| File Name | Description |
+### 🗂️ Files in Repository
 | :--- | :--- |
 | `project_queries.sql` | Contains all 10 optimized SQL queries used for the analysis. |
 | `README.md` | This overview document, providing context, insights, and instructions. |
