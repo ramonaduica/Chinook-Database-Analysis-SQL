@@ -1,82 +1,71 @@
-# 🎸 Chinook Database Analysis: SQL Queries
+# SQL Data Analysis Project: Chinook Database
 
-## 📊 Overview
-This repository contains a collection of **10 analytical SQL queries** written for the popular **Chinook Sample Database**.
+This project demonstrates strong SQL data analysis skills using the **Chinook sample database**. Chinook models a digital music store, providing data on customers, invoices, artists, albums, tracks, and genres, making it an excellent dataset for business analysis.
 
-The Chinook database models a digital media store, including tables for artists, albums, tracks, employees, customers, and invoices. This project demonstrates proficiency in SQL querying, focusing on joins, aggregation, grouping, and ordering to derive valuable business intelligence insights in the areas of **Sales Performance**, **Customer Behavior**, and **Music Catalog Analysis**.
-
----
-
-## 🛠️ Technology Used
-
-* **Database:** Chinook (SQLite, MySQL, or PostgreSQL compatible schema)
-* **Language:** SQL (Standard Query Language)
+The primary goal of this project is to **extract meaningful business insights** from the data through a series of complex SQL queries, showcasing proficiency in data aggregation, joins, grouping, and reporting.
 
 ---
 
-## 🔍 Key Insights & Summary
+### 🧰 Tools & Technologies
+
+| Category | Tool/Technology | Role in Project |
+| :--- | :--- | :--- |
+| **Database** | MySQL (via XAMPP) | The relational database system hosting the Chinook schema. |
+| **Client/IDE** | HeidiSQL (or similar) | Used to write, execute, and review the SQL queries. |
+| **Dataset** | Chinook | The open-source sample database used for the analysis. |
+| **Language** | SQL (Standard Query Language) | The core language used for all data querying and manipulation. |
+
+---
+
+### 🧮 Project Objectives & Analytical Focus
+
+The analysis is structured to answer key business questions across the sales, customer, and catalog domains:
+
+* **Customer Behavior:** Understanding customer distribution and identifying top spending patterns.
+* **Sales Performance:** Measuring revenue trends and identifying top-performing countries.
+* **Catalog Insights:** Analyzing genre popularity and identifying top artists by volume.
+* **Technical Proficiency:** Demonstrating mastery of aggregation (`SUM`, `COUNT`, `AVG`), multi-table `JOIN`s, `GROUP BY`, and data formatting (`ROUND`, `DATE_FORMAT`).
+
+---
+
+### 🧠 Summary Insights
 
 | Analysis Area | Key Finding |
 | :--- | :--- |
-| **Top Revenue Countries** | USA, Canada, and France generate the highest total revenue. |
-| **Top-Selling Genre** | Rock is the top-selling genre by total revenue. |
-| **Customer Spending** | The top 10 customers each spent a relatively consistent amount, ranging between **$40 and $50**. |
-| **Average Order Value** | The average invoice value is consistently around **$5–$7** across different countries. |
-| **Monthly Trend** | Revenue is steady month-to-month with only minor seasonal variations. |
-| **Popular Genres** | Rock, Latin, and Metal are the most popular genres by track count. |
+| **Top Revenue Countries** | **USA, Canada, and France** are the top three leaders in total revenue generation. |
+| **Top-Selling Genre** | **Rock** and **Alternative** dominate both total sales and track volume across the store. |
+| **Top Customers** | The top 10 customers show consistent high spending, each spending approximately **$40–$50**. |
+| **Sales Trend** | Monthly sales revenue remains **consistent** throughout the year with only minor seasonal fluctuation. |
+| **Average Order Value** | The average invoice value across all sales is consistently around **$6 per invoice**. |
 
 ---
 
-## 💻 SQL Queries
+### 💻 Key Queries Included
 
-The complete list of queries is contained in the file `chinook_analysis.sql`. Below is a summary and preview of the questions answered:
+The full SQL script is located in the [`project_queries.sql`](./project_queries.sql) file. Below are the key questions addressed by the analysis:
 
-### 1. Customer Overview
-* Display first 10 customers.
-* *Preview:* `SELECT FirstName, LastName, Country, Email FROM customer LIMIT 10;`
-
-### 2. Number of Customers per Country
-* Counts the total number of customers residing in each country.
-* *Preview:* `SELECT Country, COUNT(*) AS TotalCustomers FROM customer GROUP BY Country;`
-
-### 3. Top 5 Countries by Total Revenue
-* Calculates the total sales amount for each billing country and ranks them.
-* *Preview:* `SELECT BillingCountry, SUM(total) AS TotalSales FROM invoice GROUP BY BillingCountry ORDER BY TotalSales DESC LIMIT 5;`
-
-### 4. Top 10 Customers by Total Spending
-* Identifies the customers who have spent the most money in total.
-* *Preview:* `SELECT c.FirstName, c.LastName, SUM(i.total) AS TotalSpent FROM customer c JOIN invoice i ON c.CustomerId = i.CustomerId GROUP BY c.CustomerId ORDER BY TotalSpent DESC LIMIT 10;`
-
-### 5. Longest Tracks (Over 5 Minutes)
-* Lists tracks that are longer than 5 minutes (300,000 milliseconds).
-* *Preview:* `SELECT Name AS Track, ROUND(Milliseconds/60000.0, 2) AS Minutes FROM track WHERE Milliseconds > 300000;`
-
-### 6. Number of Tracks per Genre
-* Aggregates and counts the total number of tracks available in each music genre.
-* *Preview:* `SELECT g.Name AS Genre, COUNT(t.TrackId) AS TrackCount FROM genre g JOIN track t ON g.GenreId = t.GenreId GROUP BY g.Name;`
-
-### 7. Top 5 Artists by Number of Tracks
-* Identifies the artists with the greatest number of songs in the catalog.
-* *Preview:* `SELECT a.Name AS Artist, COUNT(t.TrackId) AS TotalTracks FROM artist a JOIN album al ON al.ArtistId = a.ArtistId GROUP BY a.Name ORDER BY TotalTracks DESC LIMIT 5;`
-
-### 8. Average Invoice Value per Country
-* Calculates the mean value of an invoice in each country.
-* *Preview:* `SELECT BillingCountry, ROUND(AVG(Total), 2) AS AvgInvoice FROM invoice GROUP BY BillingCountry;`
-
-### 9. Monthly Revenue Trend (Bonus)
-* Calculates the total sales revenue grouped by year and month to track trends.
-* *Preview:* `SELECT DATE_FORMAT(InvoiceDate, '%Y-%m') AS Month, ROUND(SUM(Total), 2) AS MonthlySales FROM invoice GROUP BY Month ORDER BY Month;`
-
-### 10. Top-Selling Genre by Total Revenue (Bonus)
-* Determines which music genre generates the highest overall sales.
-* *Preview:* `SELECT g.name AS Genre, ROUND(SUM(il.UnitPrice * il.Quantity), 2) AS TotalSales FROM invoiceline il JOIN track t ON il.TrackId = t.TrackId GROUP BY g.name ORDER BY TotalSales DESC LIMIT 1;`
+1.  **Customer Exploration:** Display first 10 customers.
+2.  **Customer Distribution:** Count customers per country.
+3.  **Sales Performance:** Identify top countries by total revenue.
+4.  **Customer Spending:** Find top 10 customers by total spending.
+5.  **Catalog Detail:** List longest tracks (over 5 minutes).
+6.  **Genre Popularity:** Count tracks per genre.
+7.  **Artist Contribution:** Find top artists by number of tracks.
+8.  **Order Metrics:** Calculate average invoice value per country.
+9.  **Business Trends (Bonus):** Monthly revenue trend analysis.
+10. **Product Performance (Bonus):** Determine top-selling genre by total revenue.
 
 ---
 
-## 📁 Repository Structure
+### 🚀 How to Run the Project
 
-Chinook-Database-Analysis-SQL/ ├── chinook_analysis.sql └── README.md
+To replicate this analysis, follow these steps:
 
+1.  **Install & Start Server:** Install **XAMPP** (or a similar stack) and ensure the **MySQL server** is running.
+2.  **Connect:** Use a database client like **HeidiSQL** to connect to your local MySQL instance (`localhost`).
+3.  **Load Database:** Execute the Chinook schema file (e.g., `Chinook_MySql.sql`) to create the database structure and populate the tables with data.
+4.  **Run Queries:** Open and run the queries found in the **`project_queries.sql`** file.
+5.  **Review:** Examine the output to confirm the insights outlined in this README.
 
 ---
 
